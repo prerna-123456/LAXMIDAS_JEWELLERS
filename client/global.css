@@ -155,7 +155,7 @@
     clamp(5rem, 9vw, 8rem)
     clamp(1.5rem, 6vw, 6rem);
 
-  background: #0f0d0b;
+  background: #ffffff;
 }
 
 
@@ -219,6 +219,11 @@
   grid-column: 2;
   grid-row: 1;
 
+  justify-self: end;
+  width: 100%;
+  padding-left: clamp(1rem, 4vw, 4rem);
+  padding-right: clamp(0px, 1vw, 1rem);
+
   display: flex;
 
   flex-direction: column;
@@ -257,7 +262,8 @@
   user-select: none;
 
   transition:
-    opacity 0.22s ease;
+    opacity 0.22s ease,
+    transform 0.22s ease;
 }
 
 
@@ -280,7 +286,8 @@
     );
 
   transition:
-    opacity 0.22s ease;
+    opacity 0.22s ease,
+    transform 0.22s ease;
 }
 
 
@@ -325,7 +332,7 @@
 
   letter-spacing: -0.025em;
 
-  color: #faf8f4;
+  color: #11100e;
 }
 
 
@@ -376,13 +383,7 @@
 
   letter-spacing: 0.02em;
 
-  color:
-    rgba(
-      250,
-      248,
-      244,
-      0.48
-    );
+  color: rgba(17, 16, 14, 0.62);
 }
 
 
@@ -508,7 +509,7 @@
   width: 100%;
   height: 100%;
 
-  object-fit: contain;
+  object-fit: fill;
 
   object-position: center;
 
@@ -610,6 +611,9 @@
   .editorial-featured-copy {
     grid-column: 1;
     grid-row: 1;
+
+    padding-left: 0;
+    padding-right: 0;
 
     gap: 1.25rem;
   }
@@ -866,9 +870,28 @@ header.header-scrolled > div:first-child::after {
 }
 
 #collections {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(circle at 78% 12%, rgb(201 162 74 / .1), transparent 24%),
     linear-gradient(180deg, #11100e 0%, #171411 100%);
+}
+
+#collections > div {
+  position: relative;
+  z-index: 1;
+}
+
+#collections::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  height: 180px;
+  content: "";
+  background: linear-gradient(to bottom, transparent 0%, rgb(17 16 14 / .72) 55%, #11100e 100%);
+  pointer-events: none;
 }
 
 #collections .collection-card {
@@ -893,11 +916,36 @@ header.header-scrolled > div:first-child::after {
 }
 
 #collections .collection-card img {
-  filter: saturate(.82);
+  filter: saturate(1) contrast(1.04);
+}
+
+#collections .collection-card > div:first-child {
+  background: #0d0c0a;
+}
+
+#collections .collection-card:first-child > .collection-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
 }
 
 #collections .collection-card:hover img {
-  filter: saturate(1.08);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+#collections .collection-card-image {
+  position: relative;
+}
+
+#collections .collection-card-image .collection-product-color {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  clip-path: var(--product-clip);
+  display: none;
 }
 
 #craftsmanship .grid > div,
@@ -920,6 +968,238 @@ header.header-scrolled > div:first-child::after {
   border: 1px solid rgb(201 162 74 / .35);
   border-radius: 999px;
   box-shadow: 0 0 0 1.2rem rgb(201 162 74 / .06), 0 0 0 2.4rem rgb(201 162 74 / .035);
+}
+
+#craftsmanship .craftsmanship-intro-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 250px;
+  margin-top: 3rem;
+  margin-left: auto;
+  color: #11100e;
+}
+
+#craftsmanship .craftsmanship-intro-note svg {
+  flex: 0 0 auto;
+  color: var(--gold);
+}
+
+#craftsmanship .craftsmanship-intro-note p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: .98;
+}
+
+#craftsmanship .craftsmanship-intro-note span {
+  display: block;
+  margin-top: .9rem;
+  color: rgb(17 16 14 / .45);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.craftsmanship-carousel {
+  margin-top: 2.5rem;
+}
+
+.craftsmanship-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.craftsmanship-track {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  transition: transform .9s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+
+.craftsmanship-card {
+  position: relative;
+  flex: 0 0 calc((100% - 3rem) / 4);
+  min-width: 0;
+  overflow: hidden;
+  background: #11100e;
+  box-shadow: 0 18px 42px rgb(17 16 14 / .14);
+}
+
+.craftsmanship-card-image {
+  position: relative;
+  aspect-ratio: .78;
+  overflow: hidden;
+}
+
+#craftsmanship .craftsmanship-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) saturate(0) contrast(1.05);
+  transition: filter .8s ease, transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+#craftsmanship .craftsmanship-card:hover .craftsmanship-card-image > img:first-child {
+  filter: grayscale(1) saturate(0) contrast(1.05);
+  transform: none;
+}
+
+#craftsmanship .craftsmanship-card-image .craftsmanship-product-color {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  clip-path: var(--product-clip);
+  filter: grayscale(0) saturate(1.16) contrast(1.05) drop-shadow(0 0 2px #d8b86b);
+  transform: none;
+  transition: opacity .55s ease, filter .55s ease;
+}
+
+#craftsmanship .craftsmanship-card:hover .craftsmanship-product-color {
+  opacity: 1;
+  filter: grayscale(0) saturate(1.22) contrast(1.05) drop-shadow(0 0 3px #d8b86b);
+}
+
+.craftsmanship-card-image::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(to top, rgb(17 16 14 / .78), transparent 48%);
+}
+
+.craftsmanship-card-number {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1;
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: .2em;
+}
+
+.craftsmanship-card-copy {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  min-height: 0;
+  padding: 1.15rem 1.2rem 1.3rem;
+  background: linear-gradient(to top, rgb(17 16 14 / .94), rgb(17 16 14 / .58) 70%, transparent);
+  color: #f7f3ec;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .45s ease, transform .45s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+
+.craftsmanship-card:hover .craftsmanship-card-copy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.craftsmanship-card-copy p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.65rem);
+  line-height: 1;
+}
+
+.craftsmanship-card-copy span {
+  display: block;
+  margin-top: .75rem;
+  color: rgb(247 243 236 / .55);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.craftsmanship-carousel-status {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 1.3rem;
+  color: #11100e;
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+
+.craftsmanship-carousel-rule {
+  width: 3rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+@media (max-width: 1023px) {
+  .craftsmanship-card {
+    flex-basis: calc((100% - 1rem) / 2);
+  }
+}
+
+@media (max-width: 639px) {
+  #craftsmanship .craftsmanship-intro-note {
+    margin-left: 0;
+  }
+
+  .craftsmanship-card {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  #craftsmanship .craftsmanship-card:hover .craftsmanship-product-color {
+    opacity: 1;
+    filter: grayscale(0) saturate(1.16) contrast(1.05);
+  }
+
+  #craftsmanship .craftsmanship-product-color {
+    opacity: 1;
+  }
+
+  #craftsmanship .craftsmanship-card-image .craftsmanship-product-color {
+    opacity: 1 !important;
+  }
+
+  #craftsmanship .craftsmanship-card:hover .craftsmanship-card-copy {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #craftsmanship .craftsmanship-card-copy {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #craftsmanship .craftsmanship-card:hover .craftsmanship-card-image > img:first-child {
+    filter: grayscale(1) saturate(0) contrast(1.05);
+    transform: none;
+  }
+}
+
+.testimonials-carousel-viewport {
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .testimonials-grid {
+    display: flex;
+    width: 300%;
+    animation: testimonials-slide 15s ease-in-out infinite;
+  }
+
+  .testimonials-grid article {
+    flex: 0 0 33.333333%;
+  }
+}
+
+@keyframes testimonials-slide {
+  0%, 28% { transform: translateX(0); }
+  33%, 61% { transform: translateX(-33.333333%); }
+  66%, 94% { transform: translateX(-66.666667%); }
+  100% { transform: translateX(0); }
 }
 
 main > section.border-y {
@@ -1004,6 +1284,257 @@ main > section.relative.overflow-hidden:hover img {
   border-color: rgb(201 162 74 / .75);
 }
 
+#instagram .instagram-handle {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+  background: transparent;
+  box-shadow: none;
+}
+
+#instagram .instagram-handle::after {
+  display: none;
+}
+
+#instagram {
+  padding-bottom: 0 !important;
+}
+
+.instagram-editorial {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  min-height: 660px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #3b3b3b;
+}
+
+.instagram-editorial-background,
+.instagram-editorial-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.instagram-editorial-background {
+  z-index: 0;
+  object-fit: cover;
+  filter: grayscale(1) saturate(0) brightness(.46) contrast(1.08);
+  transform: scale(1.04);
+}
+
+.instagram-editorial-shade {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgb(15 15 15 / .78), transparent 34%, rgb(15 15 15 / .5)),
+    linear-gradient(0deg, rgb(15 15 15 / .82), transparent 32%, rgb(15 15 15 / .24));
+}
+
+.instagram-editorial-message {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.instagram-editorial-message span {
+  color: var(--gold-soft);
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.instagram-editorial-message strong {
+  max-width: 32rem;
+  font-family: Georgia, serif;
+  font-size: clamp(1.7rem, 3.6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.instagram-editorial-message,
+.instagram-editorial-rows,
+.instagram-editorial-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.instagram-editorial-rows {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.1rem 2.6vw;
+  overflow: hidden;
+  transition: opacity .8s ease;
+}
+
+.instagram-editorial-row {
+  display: flex;
+  gap: 1.5vw;
+  width: 100%;
+  padding: 0;
+  justify-content: center;
+  transition: transform 2.2s cubic-bezier(.22, 1, .36, 1);
+}
+
+.instagram-editorial-row-top {
+  transform: translateX(0);
+}
+
+.instagram-editorial-row-bottom {
+  transform: translateX(0);
+}
+
+.instagram-editorial-mini-card {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 6px solid rgb(255 255 255 / .96);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: 0 16px 36px rgb(0 0 0 / .24);
+}
+
+.instagram-editorial-mini-card img {
+  display: block;
+  width: 100%;
+  height: clamp(180px, 20vw, 300px);
+  object-fit: cover;
+  border-radius: 0;
+  filter: none !important;
+  transform: none !important;
+}
+
+.instagram-editorial-mini-card p {
+  display: none;
+}
+
+.instagram-editorial-row-bottom .instagram-editorial-mini-card {
+  transform: none;
+}
+
+.instagram-editorial-spotlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(.86) translateY(1.5rem);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+
+.instagram-editorial-spotlight-image {
+  width: min(360px, 56vw);
+  height: 390px;
+  padding: .8rem .8rem 0;
+  background: #f7f4ee;
+  box-shadow: 0 22px 48px rgb(0 0 0 / .38);
+  animation: instagram-spotlight-in .9s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes instagram-spotlight-in {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.instagram-editorial-spotlight-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none !important;
+  transform: none !important;
+}
+
+.instagram-editorial-spotlight p {
+  width: min(360px, 56vw);
+  margin: 0;
+  padding: 1rem 1.2rem 1.2rem;
+  background: #f7f4ee;
+  color: #211e1a;
+  font-family: Arial, sans-serif;
+  font-size: .84rem;
+  text-align: center;
+}
+
+.instagram-editorial-stage-slide .instagram-editorial-row-top {
+  transform: translateX(-115%);
+}
+
+.instagram-editorial-stage-slide .instagram-editorial-row-bottom {
+  transform: translateX(115%);
+}
+
+.instagram-editorial-stage-message .instagram-editorial-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.instagram-editorial-stage-message .instagram-editorial-rows,
+.instagram-editorial-stage-message .instagram-editorial-spotlight {
+  opacity: 0;
+}
+
+.instagram-editorial-stage-spotlight .instagram-editorial-rows,
+.instagram-editorial-stage-spotlight .instagram-editorial-message {
+  opacity: 0;
+}
+
+.instagram-editorial-stage-spotlight .instagram-editorial-spotlight {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@media (max-width: 640px) {
+  .instagram-editorial {
+    min-height: 440px;
+  }
+
+  .instagram-editorial-row {
+    gap: .75rem;
+    padding: 0;
+  }
+
+  .instagram-editorial-mini-card {
+    flex-basis: 0;
+  }
+
+  .instagram-editorial-mini-card img {
+    height: clamp(135px, 27vw, 200px);
+  }
+
+  .instagram-editorial-spotlight-image,
+  .instagram-editorial-spotlight p {
+    width: min(280px, 78vw);
+  }
+
+  .instagram-editorial-spotlight-image {
+    height: 300px;
+  }
+}
+
 #contact {
   background:
     radial-gradient(circle at 86% 18%, rgb(201 162 74 / .1), transparent 26%),
@@ -1059,6 +1590,18 @@ footer::before {
 
 .about-luxury {
   isolation: isolate;
+}
+
+.about-luxury::before {
+  position: absolute;
+  top: clamp(4rem, 8vw, 6rem);
+  right: clamp(1.5rem, 6vw, 6rem);
+  left: clamp(1.5rem, 6vw, 6rem);
+  z-index: 20;
+  height: 1px;
+  content: "";
+  background: rgb(179 150 86 / .25);
+  pointer-events: none;
 }
 
 
