@@ -1247,48 +1247,26 @@ function SignatureShowcase() {
                 >
 
                   {/* =====================================
-                      ACTUAL MP4 VIDEO
+                      IOS-SAFE IMAGE WEDGE
                   ===================================== */}
 
-                  <foreignObject
+                  <image
                     x={bbox.x}
                     y={bbox.y}
-
-                    width={
-                      bbox.width
-                    }
-
-                    height={
-                      bbox.height
-                    }
-
+                    width={bbox.width}
+                    height={bbox.height}
+                    href={item.src}
+                    preserveAspectRatio="xMidYMid slice"
                     clipPath={`url(#editorial-wedge-${i})`}
-
                     onPointerEnter={() =>
                       playVideoOnHover(i)
                     }
-                  >
-
-                    <div
-                      className="editorial-video-wrapper"
-                    >
-
-                      <img
-                        src={item.src}
-                        alt={`${categoryContent[item.category].titleTop} ${categoryContent[item.category].titleEm}`}
-                        onMouseEnter={() =>
-                          playVideoOnHover(i)
-                        }
-                        className={
-                          isActive
-                            ? "editorial-wedge-image is-active"
-                            : "editorial-wedge-image"
-                        }
-                      />
-
-                    </div>
-
-                  </foreignObject>
+                    className={
+                      isActive
+                        ? "editorial-wedge-image is-active"
+                        : "editorial-wedge-image"
+                    }
+                  />
 
 
                   {/* =====================================
