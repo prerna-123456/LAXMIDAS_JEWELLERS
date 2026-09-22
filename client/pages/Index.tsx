@@ -13,11 +13,11 @@ import {
 const imageBase = "https://shreelaxmidasjewellers.com/wp-content/uploads/2024/04/";
 
 const collections = [
-  { name: "Gold Jewellery", image: "/collection1.png", index: "01", productClip: "polygon(0% 10%, 28% 10%, 48% 48%, 74% 70%, 100% 58%, 100% 94%, 70% 94%, 48% 72%, 20% 48%, 0% 48%)" },
-  { name: "Diamond Jewellery", image: "/collection2.png", index: "02", productClip: "polygon(0% 8%, 100% 8%, 100% 66%, 0% 66%)" },
-  { name: "Uncut Diamonds", image: "/collection3.png", index: "03", productClip: "polygon(30% 14%, 86% 14%, 86% 90%, 30% 90%)" },
-  { name: "Gemstone Jewellery", image: "/collection4.png", index: "04" },
-  { name: "Platinum", image: "/collection5.png", index: "05" },
+  { name: "Gold Jewellery", image: "/collection1.webp", index: "01", productClip: "polygon(0% 10%, 28% 10%, 48% 48%, 74% 70%, 100% 58%, 100% 94%, 70% 94%, 48% 72%, 20% 48%, 0% 48%)" },
+  { name: "Diamond Jewellery", image: "/collection2.webp", index: "02", productClip: "polygon(0% 8%, 100% 8%, 100% 66%, 0% 66%)" },
+  { name: "Uncut Diamonds", image: "/collection3.webp", index: "03", productClip: "polygon(30% 14%, 86% 14%, 86% 90%, 30% 90%)" },
+  { name: "Gemstone Jewellery", image: "/collection4.webp", index: "04" },
+  { name: "Platinum", image: "/collection5.webp", index: "05" },
 ];
 
 const gallery = [
@@ -30,12 +30,12 @@ const gallery = [
 ];
 
 const instagramCards = [
-  { image: "/gallery1.png", title: "Yellow Gold, Huggie Diamond Earrings" },
-  { image: "/gallery2.png", title: "Diamond & Yellow Gold Bracelet" },
-  { image: "/gallery3.png", title: "Diamond Rings & Bracelet Stack" },
-  { image: "/gallery4.png", title: "Blue Sapphire & Diamond Pendant" },
-  { image: "/gallery5.png", title: "Pear-Cut Natural Diamond Studs" },
-  { image: "/gallery6.png", title: "Timeless Diamond Necklace" },
+  { image: "/gallery1.webp", title: "Yellow Gold, Huggie Diamond Earrings" },
+  { image: "/gallery2.webp", title: "Traditional Yellow Gold Haar" },
+  { image: "/gallery3.webp", title: "Elegant Diamond Necklace" },
+  { image: "/gallery4.webp", title: "Sapphire & Diamond Bangle Set" },
+  { image: "/gallery5.webp", title: "Luxury Pear-Cut Diamond Ring" },
+  { image: "/gallery6.webp", title: "Classic Diamond Drop Earrings" },
 ];
 
 const signatureVideos = [1, 2, 3, 4, 5, 6, 7].map((n) => `/videos/signature-${n}.mp4`).slice(0, 5);
@@ -53,43 +53,43 @@ const navItems = [
 
 const craftsmanshipItems = [
   {
-    image: "/craft1.png",
+    image: "/craft1.webp",
     productClip: "polygon(12% 43%, 90% 43%, 90% 80%, 12% 80%)",
     title: "Temple Necklace",
     description: "Intricate gold work shaped with heritage and quiet grandeur.",
   },
   {
-    image: "/craft2.png",
+    image: "/craft2.webp",
     productClip: "polygon(53% 24%, 76% 24%, 76% 54%, 53% 54%)",
     title: "Diamond Earrings",
     description: "Light-catching details finished for an effortless statement.",
   },
   {
-    image: "/craft3.png",
+    image: "/craft3.webp",
     productClip: "polygon(12% 34%, 62% 34%, 62% 50%, 12% 50%)",
     title: "Heirloom Bangles",
     description: "Traditional forms designed to be layered and treasured.",
   },
   {
-    image: "/craft4.png",
+    image: "/craft4.webp",
     productClip: "polygon(50% 2%, 90% 2%, 90% 56%, 50% 56%)",
     title: "Bridal Edit",
     description: "Celebration pieces made to hold a lifetime of memories.",
   },
   {
-    image: "/craft5.png",
+    image: "/craft5.webp",
     productClip: "polygon(18% 20%, 78% 20%, 78% 78%, 18% 78%)",
     title: "Gemstone Details",
     description: "Colour, cut and character brought together by hand.",
   },
   {
-    image: "/craft6.png",
+    image: "/craft6.webp",
     productClip: "polygon(55% 34%, 86% 34%, 86% 62%, 55% 62%)",
     title: "Gold Filigree",
     description: "Fine textures that reveal the patience behind every piece.",
   },
   {
-    image: "/craft7.png",
+    image: "/craft7.webp",
     productClip: "polygon(18% 8%, 88% 8%, 88% 90%, 18% 90%)",
     title: "Modern Heirlooms",
     description: "Contemporary silhouettes with the soul of tradition.",
@@ -228,7 +228,7 @@ function InstagramEditorialShowcase() {
     >
       <img
         className="instagram-editorial-background"
-        src="/gallery-bg2.png"
+        src="/gallery-bg2.webp"
         alt=""
         aria-hidden="true"
       />
@@ -276,23 +276,23 @@ function InstagramEditorialShowcase() {
 
 const wedgeImages = [
   {
-    src: "/image1.png",
+    src: "/image1.webp",
     category: "necklace" as const,
   },
   {
-    src: "/image2.png",
+    src: "/image2.webp",
     category: "earrings" as const,
   },
   {
-    src: "/image3.png",
+    src: "/image3.webp",
     category: "gemstone" as const,
   },
   {
-    src: "/image4.png",
+    src: "/image4.webp",
     category: "bangles" as const,
   },
   {
-    src: "/image5.png",
+    src: "/image5.webp",
     category: "bridal" as const,
   },
 ];
@@ -306,18 +306,6 @@ const categoryContent = {
   necklace: {
     number: "01",
     label: "Shree Laxmidas Collection",
-    titleTop: "Timeless",
-    titleEm: "Forms",
-
-    description:
-      "A curated selection of gold temple-work necklaces — each one an exploration of intricate detail, rich texture, and traditional form. Jewellery as heirloom.",
-
-    linkLabel: "Explore The Necklace Edit",
-  },
-
-  earrings: {
-    number: "02",
-    label: "Shree Laxmidas Collection",
     titleTop: "Ornate",
     titleEm: "Drops",
 
@@ -327,6 +315,18 @@ const categoryContent = {
     linkLabel: "Explore The Earring Edit",
   },
 
+  earrings: {
+    number: "02",
+    label: "Shree Laxmidas Collection",
+    titleTop: "Timeless",
+    titleEm: "Forms",
+
+    description:
+      "A curated selection of gold temple-work necklaces — each one an exploration of intricate detail, rich texture, and traditional form. Jewellery as heirloom.",
+
+    linkLabel: "Explore The Necklace Edit",
+  },
+
   bangles: {
     number: "04",
     label: "Shree Laxmidas Collection",
@@ -334,7 +334,7 @@ const categoryContent = {
     titleEm: "Legacy",
 
     description:
-      "Gold temple-work bangles made to be layered and stacked — each band carrying the weight of tradition and the shine of fine craftsmanship.",
+      "Gold temple-work necklace made to be layered and stacked — each band carrying the weight of tradition and the shine of fine craftsmanship.",
 
     linkLabel: "Explore The Bangle Edit",
   },
@@ -1892,7 +1892,7 @@ export default function Index() {
 
       <section
         className="relative overflow-hidden bg-ink px-6 py-24 md:px-10 md:py-36 xl:px-16">
-        <img src="/why.png"
+        <img src="/why.webp"
           alt="Shree Laxmidas jewellery" loading="lazy"
           className="absolute inset-0 h-full w-full object-cover opacity-20" />
 
