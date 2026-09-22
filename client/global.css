@@ -65,7 +65,7 @@
   [data-reveal="left"] { transform: translateX(-32px); }
   [data-reveal="right"] { transform: translateX(32px); }
   [data-reveal].is-visible { opacity: 1; transform: translate(0); }
-  .hero-image { animation: hero-breathe 16s ease-in-out infinite alternate; transform: scale(1.04); }
+  .hero-image { animation: none; transform: none; }
   .nav-entrance .nav-link { animation: nav-in .7s both; }
   .nav-entrance .nav-link:nth-child(2) { animation-delay: .05s; }
   .nav-entrance .nav-link:nth-child(3) { animation-delay: .1s; }
@@ -497,7 +497,7 @@
    foreignObject content stays inside the viewBox.
 ========================================================= */
 
-.editorial-wedge-video {
+.editorial-wedge-image {
   display: block;
 
   width: 100%;
@@ -531,7 +531,7 @@
    ACTIVE / PLAYING VIDEO
 ========================================================= */
 
-.editorial-wedge-video.is-active {
+.editorial-wedge-image.is-active {
   filter:
     grayscale(0)
     brightness(1)
@@ -775,11 +775,11 @@ header.header-scrolled > div:first-child::after {
   z-index: 1;
   pointer-events: none;
   content: "";
-  background: linear-gradient(0deg, rgb(11 10 9 / .75), transparent);
+  background: linear-gradient(0deg, rgb(11 10 9 / .4), transparent);
 }
 
 #home .hero-image {
-  filter: saturate(.78) contrast(1.08);
+  filter: none;
   transform-origin: center;
 }
 

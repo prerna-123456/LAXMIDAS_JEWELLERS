@@ -271,28 +271,28 @@ function InstagramEditorialShowcase() {
 ========================================================= */
 
 /* =========================================================
-   FEATURED / SIGNATURE VIDEO SHOWCASE
+   FEATURED / SIGNATURE IMAGE SHOWCASE
 ========================================================= */
 
-const wedgeVideos = [
+const wedgeImages = [
   {
-    src: "/videos/signature-7.mp4",
+    src: "/image1.png",
     category: "necklace" as const,
   },
   {
-    src: "/videos/signature-6.mp4",
+    src: "/image2.png",
     category: "earrings" as const,
   },
   {
-    src: "/videos/hero-video1.mp4",
+    src: "/image3.png",
     category: "gemstone" as const,
   },
   {
-    src: "/videos/signature-4.mp4",
+    src: "/image4.png",
     category: "bangles" as const,
   },
   {
-    src: "/videos/signature-5.mp4",
+    src: "/image5.png",
     category: "bridal" as const,
   },
 ];
@@ -385,7 +385,7 @@ const VIEW_HEIGHT =
   R_OUTER * 2;
 
 const WEDGE_COUNT =
-  wedgeVideos.length;
+    wedgeImages.length;
 
 const SWEEP =
   180 / WEDGE_COUNT;
@@ -572,7 +572,7 @@ function SignatureShowcase() {
 
   const activeCategory:
     EditorialCategory =
-    wedgeVideos[active].category;
+    wedgeImages[active].category;
 
 
   const [
@@ -659,6 +659,14 @@ function SignatureShowcase() {
     categoryContent[
     displayCategory
     ];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % WEDGE_COUNT);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
 
   /* =======================================================
@@ -914,19 +922,13 @@ function SignatureShowcase() {
   };
 
   const playVideoOnHover = (index: number) => {
-    if (index === active) {
-      videoRefs.current[index]?.play().catch(() => { });
-      return;
-    }
-
     if (fadeTimeoutRef.current) {
       clearTimeout(fadeTimeoutRef.current);
     }
 
     setActive(index);
-    setDisplayCategory(wedgeVideos[index].category);
+    setDisplayCategory(wedgeImages[index].category);
     setContentFading(false);
-    videoRefs.current[index]?.play().catch(() => { });
   };
 
   const handleFanHover = (event: React.PointerEvent<SVGSVGElement>) => {
@@ -1151,7 +1153,7 @@ function SignatureShowcase() {
 
           <defs>
 
-            {wedgeVideos.map(
+            {wedgeImages.map(
               (_, i) => {
 
                 const start =
@@ -1195,7 +1197,7 @@ function SignatureShowcase() {
               VIDEO WEDGES
           =============================================== */}
 
-          {wedgeVideos.map(
+          {wedgeImages.map(
             (item, i) => {
 
               const start =
@@ -1271,39 +1273,16 @@ function SignatureShowcase() {
                       className="editorial-video-wrapper"
                     >
 
-                      <video
-                        ref={(element) => {
-
-                          videoRefs.current[
-                            i
-                          ] = element;
-
-                        }}
-
+                      <img
                         src={item.src}
-
-                        muted
-
-                        playsInline
-
-                        preload="auto"
-
-                        disablePictureInPicture
-
-                        onEnded={() =>
-                          handleVideoEnded(
-                            i
-                          )
-                        }
-
+                        alt={`${categoryContent[item.category].titleTop} ${categoryContent[item.category].titleEm}`}
                         onMouseEnter={() =>
                           playVideoOnHover(i)
                         }
-
                         className={
                           isActive
-                            ? "editorial-wedge-video is-active"
-                            : "editorial-wedge-video"
+                            ? "editorial-wedge-image is-active"
+                            : "editorial-wedge-image"
                         }
                       />
 
@@ -1523,14 +1502,10 @@ export default function Index() {
           className="
     hero-image
     absolute
-    left-1/2
-    top-1/2
-    h-[100vw]
-    w-[100vh]
+    inset-0
+    h-full
+    w-full
     max-w-none
-    -translate-x-1/2
-    -translate-y-1/2
-    -rotate-90
     object-cover
     object-center
   "
@@ -1542,7 +1517,7 @@ export default function Index() {
           aria-hidden="true"
         >
           <source
-            src="/videos/hero-video.mp4"
+            src="/videos/hero-video.mov"
             type="video/mp4"
           />
         </video>
@@ -1550,14 +1525,14 @@ export default function Index() {
         {/* =====================================================
       DARK OVERLAYS
   ===================================================== */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,16,14,.94)_0%,rgba(17,16,14,.55)_47%,rgba(17,16,14,.18)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,16,14,.9)_0%,rgba(17,16,14,.64)_38%,rgba(17,16,14,.26)_72%,rgba(17,16,14,0)_100%)]" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/65 via-transparent to-ink/50" />
 
         {/* =====================================================
       HERO CONTENT
   ===================================================== */}
-        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-24 pt-40 md:px-10 md:pb-28 xl:px-16">
+        <div className="relative z-10 mx-auto w-full max-w-[1440px] -translate-y-16 px-6 pb-24 pt-40 md:translate-y-0 md:px-10 md:pb-28 xl:px-16">
           <div className="max-w-3xl animate-fade-up">
             <Label>
               Shree Laxmidas Jewellers
