@@ -178,8 +178,30 @@ function Label({ children }: { children: React.ReactNode }) {
 function InstagramEditorialShowcase() {
   const [stage, setStage] = useState<"cards" | "slide" | "message" | "spotlight">("cards");
   const [active, setActive] = useState(0);
+  const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
+  const showcaseRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const showcase = showcaseRef.current;
+    if (!showcase) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEnteredViewport(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(showcase);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasEnteredViewport) return;
+
     const durations = { cards: 5000, slide: 2200, message: 3200, spotlight: 4200 };
     const timer = window.setTimeout(() => {
       if (stage === "cards") setStage("slide");
@@ -196,10 +218,14 @@ function InstagramEditorialShowcase() {
     }, durations[stage]);
 
     return () => window.clearTimeout(timer);
-  }, [active, stage]);
+  }, [active, hasEnteredViewport, stage]);
 
   return (
-    <div className={`instagram-editorial instagram-editorial-stage-${stage}`} aria-label="Instagram jewellery showcase">
+    <div
+      ref={showcaseRef}
+      className={`instagram-editorial instagram-editorial-stage-${stage}`}
+      aria-label="Instagram jewellery showcase"
+    >
       <img
         className="instagram-editorial-background"
         src="/gallery-bg2.png"
@@ -887,6 +913,40 @@ function SignatureShowcase() {
 
   };
 
+  const playVideoOnHover = (index: number) => {
+    if (index === active) {
+      videoRefs.current[index]?.play().catch(() => { });
+      return;
+    }
+
+    if (fadeTimeoutRef.current) {
+      clearTimeout(fadeTimeoutRef.current);
+    }
+
+    setActive(index);
+    setDisplayCategory(wedgeVideos[index].category);
+    setContentFading(false);
+    videoRefs.current[index]?.play().catch(() => { });
+  };
+
+  const handleFanHover = (event: React.PointerEvent<SVGSVGElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * R_OUTER;
+    const y = ((event.clientY - bounds.top) / bounds.height) * VIEW_HEIGHT;
+
+    if (x < 0 || x > R_OUTER || y < 0 || y > VIEW_HEIGHT) return;
+
+    const angle = (Math.atan2(y - CY, x) * 180) / Math.PI;
+    if (angle < -90 || angle > 90) return;
+
+    const index = Math.min(
+      WEDGE_COUNT - 1,
+      Math.floor((angle + 90) / SWEEP),
+    );
+
+    playVideoOnHover(index);
+  };
+
 
   /* =======================================================
      RENDER
@@ -1082,6 +1142,7 @@ function SignatureShowcase() {
           width="100%"
           height="100%"
           className="editorial-fan-svg"
+          onPointerMove={handleFanHover}
         >
 
           {/* ===============================================
@@ -1171,7 +1232,11 @@ function SignatureShowcase() {
                   }
 
                   onPointerEnter={() =>
-                    activateVideo(i)
+                    playVideoOnHover(i)
+                  }
+
+                  onMouseEnter={() =>
+                    playVideoOnHover(i)
                   }
 
                   onPointerDown={() =>
@@ -1196,6 +1261,10 @@ function SignatureShowcase() {
                     }
 
                     clipPath={`url(#editorial-wedge-${i})`}
+
+                    onPointerEnter={() =>
+                      playVideoOnHover(i)
+                    }
                   >
 
                     <div
@@ -1225,6 +1294,10 @@ function SignatureShowcase() {
                           handleVideoEnded(
                             i
                           )
+                        }
+
+                        onMouseEnter={() =>
+                          playVideoOnHover(i)
                         }
 
                         className={
@@ -1859,7 +1932,9 @@ export default function Index() {
             <div>
               <p className="max-w-md text-lg leading-8 text-ivory/70">
                 Jewellery carries memories, emotions and milestones.
-                Ours is made to become part of yours.
+                Ours is made to become part of yours. Each piece brings
+                together timeless design, thoughtful craftsmanship and the
+                warmth of a story meant to be cherished for generations.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-x-8 gap-y-3 text-[10px] uppercase tracking-[.2em] text-gold">
