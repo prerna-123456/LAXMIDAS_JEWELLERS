@@ -192,7 +192,7 @@ function InstagramEditorialShowcase() {
           observer.disconnect();
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.05 },
     );
 
     observer.observe(showcase);
@@ -202,7 +202,7 @@ function InstagramEditorialShowcase() {
   useEffect(() => {
     if (!hasEnteredViewport) return;
 
-    const durations = { cards: 5000, slide: 2200, message: 3200, spotlight: 4200 };
+    const durations = { cards: 1200, slide: 2200, message: 3200, spotlight: 4200 };
     const timer = window.setTimeout(() => {
       if (stage === "cards") setStage("slide");
       if (stage === "slide") setStage("message");
