@@ -1983,14 +1983,15 @@ export default function Index() {
         </div>
       </section>
 
-      <footer className="bg-ink px-6 pb-8 pt-20 md:px-10 md:pt-28 xl:px-16">
+      <footer className="bg-ink px-6 pb-8 pt-20 md:px-10 md:pt-16 xl:px-16">
         <div className="mx-auto max-w-[1440px]">
           <div className="flex flex-col justify-between gap-12 border-b border-white/10 pb-16 md:flex-row">
             <div>
-              <p className="font-serif text-3xl tracking-[.08em] text-ivory md:text-4xl">
-                SHREE LAXMIDAS
-              </p>
-              <p className="mt-3 text-[9px] tracking-[.52em] text-gold">JEWELLERS</p>
+              <img
+                src="/logo1.png"
+                alt="Shree Laxmidas Jewellers"
+                className="h-auto w-full max-w-[250px] object-contain object-left"
+              />
               <p className="mt-8 max-w-xs text-sm leading-6 text-ivory/45">
                 Where every piece tells a story. Tradition, authenticity and modern elegance —
                 thoughtfully crafted.
@@ -2060,14 +2061,14 @@ export default function Index() {
 
           <div className="flex flex-col justify-between gap-4 pt-7 text-[9px] uppercase tracking-[.16em] text-ivory/30 md:flex-row">
             <span>
-              © 2026 Shree Laxmidas Jewellers. Powered by{" "}
+              © 2026 Shree Laxmidas Jewellers. All Rights Reserved. Powered by{" "}
               <a
                 href="https://www.spitel.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gold transition hover:text-ivory"
               >
-                Spitel Pvt Ltd
+                Spitel Pvt. Ltd.
               </a>
             </span>
 
